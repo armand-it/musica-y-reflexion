@@ -119,12 +119,18 @@ h1 {
 /* Ajuste para móviles pequeños */
 @media (max-width: 600px) {
   body { padding: 10px; }
-  .contenedor-blog { padding: 15px; }
+  .contenedor-blog { padding: 15px; } 
   
   .controles-letra {
     flex-direction: column; /* Obliga a que cada grupo (texto + botones) esté en una línea vertical */
     align-items: flex-end;  /* Los alinea a la derecha */
     gap: 5px; /* Un pequeño espacio entre el grupo de letras y el de temas */
+  }
+
+  /* 👇 NUEVA REGLA: Alinea el contenido interno de cada grupo a la derecha 👇 */
+  .grupo-control {
+    justify-content: flex-end;
+    width: 100%; /* Obliga al grupo a ocupar todo el ancho para poder empujar el contenido a la derecha */
   }
 }
 
