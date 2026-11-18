@@ -120,6 +120,12 @@ h1 {
 @media (max-width: 600px) {
   body { padding: 10px; }
   .contenedor-blog { padding: 15px; }
+  
+  .controles-letra {
+    flex-direction: column; /* Obliga a que cada grupo (texto + botones) esté en una línea vertical */
+    align-items: flex-end;  /* Los alinea a la derecha */
+    gap: 5px; /* Un pequeño espacio entre el grupo de letras y el de temas */
+  }
 }
 
 /* Estilos del pie de página (Footer) */
@@ -300,7 +306,8 @@ footer .cita {
 .controles-letra {
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Alinea a la derecha */
+  justify-content: flex-end; /* Mantiene todo a la derecha */
+  flex-wrap: wrap; /* 👈 Permite que si no caben, bajen a la siguiente línea */
   gap: 10px;
   margin-bottom: 20px;
   font-size: 0.9rem;
@@ -321,4 +328,11 @@ footer .cita {
 
 .btn-acc:hover {
   background-color: var(--btn-hover);
+}
+
+/* Agrupación de controles */
+.grupo-control {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre el texto y los botones de su grupo */
 }
