@@ -89,6 +89,26 @@ document.getElementById('btn-compartir-reflexion').addEventListener('click', fun
     const mensaje = `Te comparto esta reflexión: ${titulo}\n\nLéela aquí: ${url}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(mensaje)}`, '_blank');
 });
+
+// Lógica para el botón de Audio
+const btnAudio = document.getElementById('btn-play-audio');
+const miAudio = document.getElementById('mi-audio');
+
+if (btnAudio && miAudio) {
+    btnAudio.addEventListener('click', function() {
+        if (miAudio.paused) {
+            miAudio.play();
+            this.innerHTML = '⏸ Pausar audio'; // Cambia el texto
+        } else {
+            miAudio.pause();
+            this.innerHTML = '🎧 Escuchar esta reflexión';
+        }
+    });
+
+    miAudio.addEventListener('ended', function() {
+        btnAudio.innerHTML = '🎧 Escuchar esta reflexión';
+    });
+}
 </script>
 
 </body>
