@@ -27,15 +27,19 @@
         </div>        
     </div>
 
+
+
         <!-- Reproductor de Audio (Opcional) -->
         <div class="audio-container" id="zona-audio" style="display: none; margin-bottom: 20px;">
-            <p style="font-weight: bold; margin-bottom: 5px;">🎧 Escuchar esta reflexión:</p>
-            <audio controls style="width: 100%;">
+            <button id="btn-play-audio" class="btn-compartir" style="background-color: #1a73e8; display: flex; align-items: center; gap: 8px;">
+                🎧 Escuchar esta reflexión
+            </button>
+            <audio id="mi-audio" style="display: none;" onerror="document.getElementById('zona-audio').style.display='none';">
                 <source src="{{AUDIO}}" type="audio/mpeg">
-                Tu navegador no soporta el elemento de audio.
             </audio>
         </div>
-    
+
+
     <!-- Aquí va el texto de la reflexión -->
     <div id="video-reflexion" class="entrada">
         {{CONTENIDO}}
