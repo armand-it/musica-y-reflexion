@@ -1,29 +1,76 @@
-/*  Estilos base para el blog */
+/* =========================================
+   VARIABLES DE COLOR (Para los 3 Temas)
+   ========================================= */
+:root {
+  --bg-body: #f9f9f9;
+  --bg-contenedor: #ffffff;
+  --texto-principal: #333;
+  --texto-titulos: #222;
+  --borde-suave: #eee;
+  --btn-fondo: #f0f0f0;
+  --btn-texto: #333;
+  --btn-hover: #e0e0e0;
+  --letra-fondo: #fdfdfd;
+  --letra-borde: #1a73e8;
+  --letra-texto: #333;
+}
+
+body.tema-oscuro {
+  --bg-body: #1e1e1e;
+  --bg-contenedor: #2d2d2d;
+  --texto-principal: #e0e0e0;
+  --texto-titulos: #ffffff;
+  --borde-suave: #444;
+  --btn-fondo: #444;
+  --btn-texto: #fff;
+  --btn-hover: #555;
+  --letra-fondo: #383838;
+  --letra-borde: #4da3ff;
+  --letra-texto: #e0e0e0;
+}
+
+body.tema-sepia {
+  --bg-body: #f4ecd8;
+  --bg-contenedor: #fdf6e3;
+  --texto-principal: #5b4636;
+  --texto-titulos: #3e2723;
+  --borde-suave: #e0d5c1;
+  --btn-fondo: #e8dac1;
+  --btn-texto: #5b4636;
+  --btn-hover: #d8c8a9;
+  --letra-fondo: #fcf3e3;
+  --letra-borde: #8d6e63;
+  --letra-texto: #5b4636;
+}
+
+/* Estilos base para el blog */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: var(--bg-body);
+  color: var(--texto-principal);
   line-height: 1.6;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .contenedor-blog {
   max-width: 800px;
   margin: 0 auto;
-  background: white;
+  background: var(--bg-contenedor);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.3s;
 }
 
 h1 {
-  color: #222;
+  color: var(--texto-titulos);
 }
 
 .entrada {
   margin-bottom: 40px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--borde-suave);
   padding-bottom: 20px;
 }
 
@@ -69,8 +116,6 @@ h1 {
   opacity: 0.8; 
 }
 
-
-
 /* Ajuste para móviles pequeños */
 @media (max-width: 600px) {
   body { padding: 10px; }
@@ -81,9 +126,9 @@ h1 {
 footer {
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 2px solid #ddd;
+  border-top: 2px solid var(--borde-suave);
   text-align: center; /* Centra todo el texto */
-  color: #666;
+  color: var(--texto-principal);
   font-style: italic;
 }
 
@@ -97,14 +142,14 @@ footer .cita {
   font-size: 0.85rem;
   font-weight: bold; /* Hace que la cita resalte un poco */
   margin: 0;
-  color: #444; /* Un gris un poco más oscuro para la cita */
+  color: var(--texto-titulos); /* Un gris un poco más oscuro para la cita */
 }
 
 /* Estilos para los comentarios desplegables (Acordeón) */
 .btn-comentarios {
   display: inline-block;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--btn-fondo);
+  color: var(--btn-texto);
   padding: 8px 15px;
   border-radius: 5px;
   font-weight: bold;
@@ -116,7 +161,7 @@ footer .cita {
 }
 
 .btn-comentarios:hover {
-  background-color: #e0e0e0;
+  background-color: var(--btn-hover);
 }
 
 /* Ocultamos el checkbox real (el que hace la magia) listo para iOS */
@@ -131,12 +176,13 @@ footer .cita {
 /* Por defecto, los comentarios están ocultos */
 .contenedor-comentarios {
   display: none;
-  background-color: #fafafa;
-  border-left: 4px solid #ccc;
+  background-color: var(--letra-fondo);
+  border-left: 4px solid var(--borde-suave);
   padding: 10px 15px;
   margin-top: 10px;
   font-size: 1em; /* Hereda el tamaño del body */
   border-radius: 0 5px 5px 0;
+  color: var(--letra-texto);
 }
 
 /* Cuando el checkbox está marcado, mostramos los comentarios */
@@ -159,8 +205,8 @@ footer .cita {
 
 .btn-letra {
   display: inline-block;
-  background-color: #e8f0fe; 
-  color: #1a73e8; 
+  background-color: var(--btn-fondo); 
+  color: var(--letra-borde); 
   padding: 8px 15px;
   border-radius: 5px;
   font-weight: bold;
@@ -172,7 +218,7 @@ footer .cita {
 }
 
 .btn-letra:hover {
-  background-color: #d2e3fc;
+  background-color: var(--btn-hover);
 }
 
 /* Ocultamos el checkbox real para iOS */
@@ -187,20 +233,20 @@ footer .cita {
 /* Por defecto, la letra está oculta. */
 .contenedor-letra {
   display: none;
-  background-color: #fdfdfd;
-  border-left: 4px solid #1a73e8;
+  background-color: var(--letra-fondo);
+  border-left: 4px solid var(--letra-borde);
   padding: 15px;
   margin-top: 10px;
   font-size: 1em; /* Un poquito más grande para leer mejor */
   line-height: 1.6;
-  color: #333; /* Un gris más oscuro, se lee mejor */
+  color: var(--letra-texto); /* Un gris más oscuro, se lee mejor */
   font-style: normal; /* 👈 ESTO QUITA LA CURSIVA */
   font-family: 'Georgia', serif; /* 👈 Una fuente tipo libro, muy elegante */
   border-radius: 0 5px 5px 0;
 }
 
 .contenedor-letra b {
-  color: #1a73e8; /* El azul de tu marca */
+  color: var(--letra-borde); /* El azul de tu marca */
   font-size: 1.05rem;
 }
 
@@ -258,13 +304,13 @@ footer .cita {
   gap: 10px;
   margin-bottom: 20px;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--texto-principal);
 }
 
 .btn-acc {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  color: #333;
+  background-color: var(--btn-fondo);
+  border: 1px solid var(--borde-suave);
+  color: var(--btn-texto);
   border-radius: 4px;
   padding: 4px 10px;
   cursor: pointer;
@@ -274,5 +320,5 @@ footer .cita {
 }
 
 .btn-acc:hover {
-  background-color: #e0e0e0;
+  background-color: var(--btn-hover);
 }

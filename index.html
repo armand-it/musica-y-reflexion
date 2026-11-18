@@ -17,6 +17,11 @@
         <span>Tamaño de letra:</span>
         <button id="btn-aumentar" class="btn-acc" title="Aumentar letra">A+</button>
         <button id="btn-disminuir" class="btn-acc" title="Disminuir letra">A-</button>
+
+        <span style="margin-left: 15px;">Tema:</span>
+        <button class="btn-acc btn-tema" data-tema="claro" title="Tema Claro">☀️</button>
+        <button class="btn-acc btn-tema" data-tema="sepia" title="Tema Sepia">📜</button>
+        <button class="btn-acc btn-tema" data-tema="oscuro" title="Tema Oscuro">🌙</button>
     </div>
 
     <!-- Entrada del Blog: Altavoz -->
@@ -271,6 +276,33 @@ document.getElementById('btn-disminuir').addEventListener('click', () => {
         document.body.style.fontSize = `${tamanoActual}%`;
         localStorage.setItem('tamanoFuente', tamanoActual);
     }
+});
+
+
+// Lógica para los Temas de Color
+const botonesTema = document.querySelectorAll('.btn-tema');
+
+// Recuperar el tema guardado
+const temaGuardado = localStorage.getItem('temaColor');
+if (temaGuardado && temaGuardado !== 'claro') {
+    document.body.classList.add(`tema-${temaGuardado}`);
+}
+
+botonesTema.forEach(boton => {
+    boton.addEventListener('click', function() {
+        const tema = this.getAttribute('data-tema');
+        
+        // Limpiamos solo las clases de tema que pudieran existir
+        document.body.classList.remove('tema-oscuro', 'tema-sepia');
+        
+        // Si el tema no es el claro (que es el default), le ponemos la clase
+        if (tema !== 'claro') {
+            document.body.classList.add(`tema-${tema}`);
+        }
+        
+        // Guarda la preferencia en el navegador
+        localStorage.setItem('temaColor', tema);
+    });
 });
 
 </script>
