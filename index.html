@@ -12,6 +12,12 @@
 <div class="contenedor-blog">
     <h1>Música, canto y más...</h1>
 
+    <!-- Controles de accesibilidad -->
+    <div class="controles-letra">
+        <span>Tamaño de letra:</span>
+        <button id="btn-aumentar" class="btn-acc" title="Aumentar letra">A+</button>
+        <button id="btn-disminuir" class="btn-acc" title="Disminuir letra">A-</button>
+    </div>
 
     <!-- Entrada del Blog: Altavoz -->
     <div id="video-4" class="entrada">
@@ -240,6 +246,33 @@ document.querySelectorAll('.btn-compartir').forEach(boton => {
         window.open(`https://api.whatsapp.com/send?text=${mensajeCodificado}`, '_blank');
     });
 });
+
+// Lógica para el tamaño de la fuente
+let tamanoActual = 100; // 100%
+
+// Recuperar el tamaño guardado si el usuario vuelve a entrar
+const tamanoGuardado = localStorage.getItem('tamanoFuente');
+if (tamanoGuardado) {
+    tamanoActual = parseInt(tamanoGuardado);
+    document.body.style.fontSize = `${tamanoActual}%`;
+}
+
+document.getElementById('btn-aumentar').addEventListener('click', () => {
+    if (tamanoActual < 150) { // Límite máximo (150%)
+        tamanoActual += 10;
+        document.body.style.fontSize = `${tamanoActual}%`;
+        localStorage.setItem('tamanoFuente', tamanoActual);
+    }
+});
+
+document.getElementById('btn-disminuir').addEventListener('click', () => {
+    if (tamanoActual > 80) { // Límite mínimo (80%)
+        tamanoActual -= 10;
+        document.body.style.fontSize = `${tamanoActual}%`;
+        localStorage.setItem('tamanoFuente', tamanoActual);
+    }
+});
+
 </script>
 
 </body>

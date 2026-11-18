@@ -249,3 +249,30 @@ footer .cita {
 .btn-compartir:hover {
   background-color: #1ebe57;
 }
+
+/* Controles de accesibilidad */
+.controles-letra {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Alinea a la derecha */
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.btn-acc {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  color: #333;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.btn-acc:hover {
+  background-color: #e0e0e0;
+}
