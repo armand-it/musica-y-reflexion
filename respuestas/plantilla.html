@@ -27,17 +27,15 @@
         </div>        
     </div>
 
-
-
-        <!-- Reproductor de Audio (Opcional) -->
-        <div class="audio-container" id="zona-audio" style="display: none; margin-bottom: 20px;">
-            <button id="btn-play-audio" class="btn-compartir" style="background-color: #1a73e8; display: flex; align-items: center; gap: 8px;">
-                🎧 Escuchar esta reflexión
-            </button>
-            <audio id="mi-audio" style="display: none;" onerror="document.getElementById('zona-audio').style.display='none';">
-                <source src="{{AUDIO}}" type="audio/mpeg">
-            </audio>
-        </div>
+    <!-- Reproductor de Audio (Opcional) -->
+    <div class="audio-container oculto" id="zona-audio" style="margin-bottom: 20px;">
+        <button id="btn-play-audio" class="btn-compartir" style="background-color: #1a73e8; display: flex; align-items: center; gap: 8px;">
+            🎧 Escuchar esta reflexión
+        </button>
+        <audio id="mi-audio" style="display: none;">
+            <source id="fuente-audio" src="{{AUDIO}}" type="audio/mpeg">
+        </audio>
+    </div>
 
 
     <!-- Aquí va el texto de la reflexión -->
@@ -90,25 +88,47 @@ document.getElementById('btn-compartir-reflexion').addEventListener('click', fun
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(mensaje)}`, '_blank');
 });
 
-// Lógica para el botón de Audio
+// Lógica para verificar si el audio existe antes de mostrarlo
 const btnAudio = document.getElementById('btn-play-audio');
 const miAudio = document.getElementById('mi-audio');
+const fuenteAudio = document.getElementById('fuente-audio');
+const urlAudio = fuenteAudio.getAttribute('src');
 
-if (btnAudio && miAudio) {
-    btnAudio.addEventListener('click', function() {
-        if (miAudio.paused) {
-            miAudio.play();
-            this.innerHTML = '⏸ Pausar audio'; // Cambia el texto
-        } else {
-            miAudio.pause();
-            this.innerHTML = '🎧 Escuchar esta reflexión';
-        }
-    });
+if (urlAudio && urlAudio.trim() !== '') {
+    // Hacemos una petición rápida (HEAD) para ver si el archivo existe
+    fetch(urlAudio, { method: 'HEAD' })
+        .then(response => {
+            if (response.ok) {
+                // Si el archivo existe, mostramos el botón
+                document.getElementById('zona-audio').classList.remove('oculto');
+                
+                // Lógica del botón Play/Pause
+                btnAudio.addEventListener('click', function() {
+                    if (miAudio.paused) {
+                        miAudio.play();this.innerHTML = '⏸ Pausar audio';
+                    } else {
+                        miAudio.pause();
+                        this.innerHTML = '🎧 Escuchar esta reflexión';
+                    }
+                });
 
-    miAudio.addEventListener('ended', function() {
-        btnAudio.innerHTML = '🎧 Escuchar esta reflexión';
-    });
+                miAudio.addEventListener('ended', function() {
+                    btnAudio.innerHTML = '🎧 Escuchar esta reflexión';
+                });
+            } else {
+                // Si el servidor dice que no existe, lo dejamos oculto
+                document.getElementById('zona-audio').classList.add('oculto');
+            }
+        })
+        .catch(error => {
+            // Si hay error de red (o CORS), lo dejamos oculto
+            document.getElementById('zona-audio').classList.add('oculto');
+        });
+} else {
+    // Si no hay URL en el HTML, lo dejamos oculto
+    document.getElementById('zona-audio').classList.add('oculto');
 }
+
 </script>
 
 </body>

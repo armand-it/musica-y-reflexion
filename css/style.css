@@ -342,3 +342,8 @@ footer .cita {
   align-items: center;
   gap: 8px; /* Espacio entre el texto y los botones de su grupo */
 }
+
+/* Clase para ocultar elementos hasta que el JS confirme */
+.oculto {
+  display: none !important;
+}
