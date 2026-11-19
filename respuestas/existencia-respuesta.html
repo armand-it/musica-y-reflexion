@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>resp 2</title>
+    <title>existencia ... respuesta1</title>
     <!-- Conectamos al CSS del proyecto principal usando ../ -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
 <div class="contenedor-blog">
-    <h1>resp 2</h1>
+    <h1>existencia ... respuesta1</h1>
 
     <!-- Controles de accesibilidad (reutilizados) -->
     <div class="controles-letra">
@@ -27,27 +27,26 @@
         </div>        
     </div>
 
-
-
         <!-- Reproductor de Audio (Opcional) -->
         <div class="audio-container" id="zona-audio" style=" margin-bottom: 20px;">
-            <button id="btn-play-audio" class="btn-compartir" style="background-color: #1a73e8; display: flex; align-items: center; gap: 8px;">
-                🎧 Escuchar esta reflexión
-            </button>
-            <audio id="mi-audio" style="display: none;" onerror="document.getElementById('zona-audio').style.display='none';">
-                <source src="https://archive.org/download/prueba-audio-reflexion/tu-archiv.mp3" type="audio/mpeg">
+            <p style="font-weight: bold; margin-bottom: 5px;">🎧 Escuchar esta reflexión:</p>
+            <audio controls style="width: 100%;">
+                <source src="https://archive.org/download/audios-musica-y-reflexion/reflex1.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
             </audio>
         </div>
-
-
+    
     <!-- Aquí va el texto de la reflexión -->
     <div id="video-reflexion" class="entrada">
-        <p>resp 2 1<br>resp 2 2<br>resp 2 3<br>resp 2 4</p>
+        <p>1 existencia ... respuesta1<br>2 existencia ... respuesta1<br>3 existencia ... respuesta1</p>
         
     </div>
 
     <!-- Botón de Compartir -->
     <button class="btn-compartir" id="btn-compartir-reflexion">➦ Compartir esta reflexión</button>
+
+    <!-- Aquí el script inyectará el botón de "Volver" si se requiere -->
+    
 
 </div>
 
@@ -90,26 +89,6 @@ document.getElementById('btn-compartir-reflexion').addEventListener('click', fun
     const mensaje = `Te comparto esta reflexión: ${titulo}\n\nLéela aquí: ${url}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(mensaje)}`, '_blank');
 });
-
-// Lógica para el botón de Audio
-const btnAudio = document.getElementById('btn-play-audio');
-const miAudio = document.getElementById('mi-audio');
-
-if (btnAudio && miAudio) {
-    btnAudio.addEventListener('click', function() {
-        if (miAudio.paused) {
-            miAudio.play();
-            this.innerHTML = '⏸ Pausar audio'; // Cambia el texto
-        } else {
-            miAudio.pause();
-            this.innerHTML = '🎧 Escuchar esta reflexión';
-        }
-    });
-
-    miAudio.addEventListener('ended', function() {
-        btnAudio.innerHTML = '🎧 Escuchar esta reflexión';
-    });
-}
 </script>
 
 </body>
