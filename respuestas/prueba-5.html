@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prueba 5</title>
+    <!-- Conectamos al CSS del proyecto principal usando ../ -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="contenedor-blog">
+    <h1>prueba 5</h1>
+
+    <!-- Controles de accesibilidad (reutilizados) -->
+    <div class="controles-letra">
+        <div class="grupo-control">
+            <span>Tamaño:</span>
+            <button id="btn-aumentar" class="btn-acc" title="Aumentar letra">A+</button>
+            <button id="btn-disminuir" class="btn-acc" title="Disminuir letra">A-</button>
+        </div>
+        <div class="grupo-control">
+            <span>Tema:</span>
+            <button class="btn-acc btn-tema" data-tema="claro" title="Tema Claro">☀️</button>
+            <button class="btn-acc btn-tema" data-tema="sepia" title="Tema Sepia">📜</button>
+            <button class="btn-acc btn-tema" data-tema="oscuro" title="Tema Oscuro">🌙</button>
+        </div>        
+    </div>
+
+    <!-- Reproductor de Audio (Opcional) -->
+    <div class="audio-container oculto" id="zona-audio" style="margin-bottom: 20px;">
+        <button id="btn-play-audio" class="btn-compartir" style="background-color: #1a73e8; display: flex; align-items: center; gap: 8px;">
+            🎧 Escuchar esta reflexión
+        </button>
+        <audio id="mi-audio" style="display: none;">
+            <source id="fuente-audio" src="hhttps://archive.org/down/qwert.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+
+    <!-- Aquí va el texto de la reflexión -->
+    <div id="video-reflexion" class="entrada">
+        <p>hhttps://archive.org/down/qwert.mp3 1<br>hhttps://archive.org/down/qwert.mp3 2<br>hhttps://archive.org/down/qwert.mp3 3</p>
+        
+    </div>
+
+    <!-- Botón de Compartir -->
+    <button class="btn-compartir" id="btn-compartir-reflexion">➦ Compartir esta reflexión</button>
+
+</div>
+
+<footer>
+    <p class="frase">"Compartiendo fe y esperanza"</p>
+</footer>
+
+<script>
+// Lógica para el tamaño de la fuente (idéntica a la del blog)
+let tamanoActual = 100; 
+const tamanoGuardado = localStorage.getItem('tamanoFuente');
+if (tamanoGuardado) {
+    tamanoActual = parseInt(tamanoGuardado);
+    document.body.style.fontSize = `${tamanoActual}%`;
+}
+document.getElementById('btn-aumentar').addEventListener('click', () => {
+    if (tamanoActual < 150) { tamanoActual += 10; document.body.style.fontSize = `${tamanoActual}%`; localStorage.setItem('tamanoFuente', tamanoActual); }
+});
+document.getElementById('btn-disminuir').addEventListener('click', () => {
+    if (tamanoActual > 80) { tamanoActual -= 10; document.body.style.fontSize = `${tamanoActual}%`; localStorage.setItem('tamanoFuente', tamanoActual); }
+});
+
+// Lógica para los temas (idéntica a la del blog)
+const botonesTema = document.querySelectorAll('.btn-tema');
+const temaGuardado = localStorage.getItem('temaColor');
+if (temaGuardado && temaGuardado !== 'claro') { document.body.classList.add(`tema-${temaGuardado}`); }
+botonesTema.forEach(boton => {
+    boton.addEventListener('click', function() {
+        const tema = this.getAttribute('data-tema');
+        document.body.classList.remove('tema-oscuro', 'tema-sepia');
+        if (tema !== 'claro') { document.body.classList.add(`tema-${tema}`); }
+        localStorage.setItem('temaColor', tema);
+    });
+});
+
+// Lógica para compartir la reflexión
+document.getElementById('btn-compartir-reflexion').addEventListener('click', function() {
+    const url = window.location.href; // Toma la URL exacta de esta página
+    const titulo = document.title;
+    const mensaje = `Te comparto esta reflexión: ${titulo}\n\nLéela aquí: ${url}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(mensaje)}`, '_blank');
+});
+
+// Lógica para verificar si el audio existe antes de mostrarlo
+const btnAudio = document.getElementById('btn-play-audio');
+const miAudio = document.getElementById('mi-audio');
+const fuenteAudio = document.getElementById('fuente-audio');
+const urlAudio = fuenteAudio.getAttribute('src');
+
+if (urlAudio && urlAudio.trim() !== '') {
+    // Hacemos una petición rápida (HEAD) para ver si el archivo existe
+    fetch(urlAudio, { method: 'HEAD' })
+        .then(response => {
+            if (response.ok) {
+                // Si el archivo existe, mostramos el botón
+                document.getElementById('zona-audio').classList.remove('oculto');
+                
+                // Lógica del botón Play/Pause
+                btnAudio.addEventListener('click', function() {
+                    if (miAudio.paused) {
+                        miAudio.play();this.innerHTML = '⏸ Pausar audio';
+                    } else {
+                        miAudio.pause();
+                        this.innerHTML = '🎧 Escuchar esta reflexión';
+                    }
+                });
+
+                miAudio.addEventListener('ended', function() {
+                    btnAudio.innerHTML = '🎧 Escuchar esta reflexión';
+                });
+            } else {
+                // Si el servidor dice que no existe, lo dejamos oculto
+                document.getElementById('zona-audio').classList.add('oculto');
+            }
+        })
+        .catch(error => {
+            // Si hay error de red (o CORS), lo dejamos oculto
+            document.getElementById('zona-audio').classList.add('oculto');
+        });
+} else {
+    // Si no hay URL en el HTML, lo dejamos oculto
+    document.getElementById('zona-audio').classList.add('oculto');
+}
+
+</script>
+
+</body>
+</html>
