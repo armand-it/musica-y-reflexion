@@ -116,23 +116,6 @@ h1 {
   opacity: 0.8; 
 }
 
-/* Ajuste para móviles pequeños */
-@media (max-width: 600px) {
-  body { padding: 10px; }
-  .contenedor-blog { padding: 15px; } 
-  
-  .controles-letra {
-    flex-direction: column; /* Obliga a que cada grupo (texto + botones) esté en una línea vertical */
-    align-items: flex-end;  /* Los alinea a la derecha */
-    gap: 5px; /* Un pequeño espacio entre el grupo de letras y el de temas */
-  }
-
-  /* 👇 NUEVA REGLA: Alinea el contenido interno de cada grupo a la derecha 👇 */
-  .grupo-control {
-    justify-content: flex-end;
-    width: 100%; /* Obliga al grupo a ocupar todo el ancho para poder empujar el contenido a la derecha */
-  }
-}
 
 /* Estilos del pie de página (Footer) */
 footer {
@@ -461,14 +444,31 @@ footer .cita {
 }
 
 /* =========================================
-   VERSIÓN MÓVIL (Menú Hamburguesa)
+   VERSIÓN MÓVIL (Menú y Ajustes)
    ========================================= */
 @media (max-width: 600px) {
-  .navbar {
-    flex-direction: column; /* Apila el botón y el menú */
-    align-items: flex-end; /* Pone la hamburguesa a la derecha */
+  body { padding: 10px; }
+  .contenedor-blog { padding: 15px; } 
+  
+.navbar {
+    flex-direction: column; 
+    align-items: flex-end; 
+    padding-bottom: 15px; /* 👈 Le da espacio extra abajo */
+    margin-bottom: 25px;  /* 👈 Separa la hamburguesa de los controles de tamaño */
   }
 
+  .controles-letra {
+    flex-direction: column; /* Obliga a que cada grupo (texto + botones) esté en una línea vertical */
+    align-items: flex-end;  /* Los alinea a la derecha */
+    gap: 5px; /* Un pequeño espacio entre el grupo de letras y el de temas */
+  }
+
+  /* 👇 NUEVA REGLA: Alinea el contenido interno de cada grupo a la derecha 👇 */
+  .grupo-control {
+    justify-content: flex-end;
+    width: 100%; /* Obliga al grupo a ocupar todo el ancho para poder empujar el contenido a la derecha */
+  }
+  
   .menu-toggle {
     display: block; /* Muestra la hamburguesa */
   }
