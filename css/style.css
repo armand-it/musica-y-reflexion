@@ -409,3 +409,83 @@ footer .cita {
   height: 100%;
   border: none;
 }
+
+/* =========================================
+   BARRA DE NAVEGACIÓN (MENÚ)
+   ========================================= */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--borde-suave);
+  padding-bottom: 10px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--texto-principal);
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--letra-borde); /* El azul de tu marca */
+}
+
+/* Estilo especial para el botón del Evangelio */
+.btn-evangelio-nav {
+  color: var(--letra-borde) !important;
+  border: 2px solid var(--letra-borde);
+  padding: 4px 10px;
+  border-radius: 5px;
+}
+
+/* El botón de hamburguesa está OCULTO en computadoras */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--texto-principal);
+  cursor: pointer;
+}
+
+/* =========================================
+   VERSIÓN MÓVIL (Menú Hamburguesa)
+   ========================================= */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column; /* Apila el botón y el menú */
+    align-items: flex-end; /* Pone la hamburguesa a la derecha */
+  }
+
+  .menu-toggle {
+    display: block; /* Muestra la hamburguesa */
+  }
+
+  .nav-links {
+    display: none; /* Esconde los enlaces por defecto en móviles */
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--bg-contenedor);
+    padding: 10px 0;
+    text-align: right;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+
+  /* Esta clase se activa con JavaScript para mostrar el menú */
+  .nav-links.active {
+    display: flex;
+  }
+}

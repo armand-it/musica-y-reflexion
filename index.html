@@ -12,6 +12,22 @@
 <div class="contenedor-blog">
     <h1>Música, canto y más...</h1>
 
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar">
+        <!-- Botón de Hamburguesa (solo visible en celular) -->
+        <button class="menu-toggle" id="mobile-menu" aria-label="Abrir menú">
+            ☰
+        </button>
+
+        <!-- Contenedor de los enlaces -->
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="activo">Inicio</a></li>
+            <li><a href="evangelio.html" class="btn-evangelio-nav">El Evangelio</a></li>
+            <li><a href="acerca.html">Acerca de</a></li>
+            <li><a href="#" style="color: #999; cursor: default;">Testimonios (Pronto...)</a></li>
+        </ul>
+    </nav>
+
     <!-- Controles de accesibilidad -->
     <div class="controles-letra">
         <div class="grupo-control">
@@ -243,6 +259,16 @@
 </div>
 
 <script>
+
+// Lógica para el Menú Hamburguesa
+const menuToggle = document.getElementById('mobile-menu');
+const navLinks = document.getElementById('nav-links');
+
+menuToggle.addEventListener('click', function() {
+    // Alterna la clase 'active' para mostrar u ocultar la lista
+    navLinks.classList.toggle('active');
+});
+
 document.querySelectorAll('.video-fachada').forEach(fachada => {
     fachada.addEventListener('click', function() {
         const idVideo = this.getAttribute('data-id');
